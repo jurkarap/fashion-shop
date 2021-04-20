@@ -67,6 +67,8 @@ export default {
     top: 30px
     right: 0
     width: 100%
+    z-index: 2
+    background: #ffffff
 
 .title
     border: solid 1px #aeaeaa

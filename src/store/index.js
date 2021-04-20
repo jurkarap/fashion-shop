@@ -28,6 +28,7 @@ export default createStore({
 
     },
     DELETE_CART_ITEM: (state, index) => {
+      state.cart[index].quantity = 1
       state.cart.splice(index, 1)
     },
     INCREMENT: (state, index) => {

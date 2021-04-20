@@ -1,11 +1,19 @@
 <template>
   <div class="app">
+    <transition name="fade">
+      <cart
+        v-if="cartOpened"
+        :cart_data="CART"
+        v-bind:class="{ opened: cartOpened, closed: !cartOpened }"
+        @cartClosed="cartClosed()"
+      />
+    </transition>
+
     <div class="navbar">
       <div class="container">
         <div class="navbar-router-links">
           <router-link class="router-link" to="/home">home</router-link>
           <router-link class="router-link" to="/catalog">catalog</router-link>
-          <router-link class="router-link" to="/cart">cart</router-link>
         </div>
         <div class="text-end languages">
           <span>UK</span>
@@ -58,25 +66,21 @@
                 aria-label=""
                 aria-describedby="button-addon2"
               />
-              <button
-                class="btn"
-                type="button"
-                id="button-addon2"
-              >
+              <button class="btn" type="button" id="button-addon2">
                 Пошук
               </button>
             </div>
           </form>
         </div>
-        <a class="main-wrapper-number mt-3" href="+38 (093) 000 00 00">+38 (093) 000 00 00</a>
-        <a href="#" class="cart-widget mt-2">
+        <a class="main-wrapper-number mt-3" href="#">+38 (093) 000 00 00</a>
+        <div href="" class="cart-widget mt-2" @click="openCart()">
           <img
             src="./assets/img/shopping-bag.svg"
             class="shopping-bag"
             alt=""
           />
           <span class="cart-counter text-center">{{ CART.length }}</span>
-        </a>
+        </div>
       </div>
     </div>
     <div class="container d-flex justify-content-start categories">
@@ -91,20 +95,32 @@
 
 <script>
 import { mapGetters } from "vuex";
-import Home from './components/home.vue';
+import Home from "./components/home.vue";
 import wrapper from "./components/wrapper.vue";
+import cart from "./components/cart.vue";
 
 export default {
   name: "App",
   components: {
     wrapper,
     Home,
+    cart,
   },
   computed: {
     ...mapGetters(["CART"]),
   },
   data() {
-    return {};
+    return {
+      cartOpened: false,
+    };
+  },
+  methods: {
+    openCart() {
+      this.cartOpened = true;
+    },
+    cartClosed() {
+      this.cartOpened = false;
+    },
   },
 };
 </script>
@@ -113,10 +129,13 @@ export default {
 *
   font-family: 'Poppins', sans-serif
 
+.app
+  position: relative
+
 .navbar
   background: #a1a1a1
 
-.navbar-router-links  
+.navbar-router-links
   .router-link
     font-size: 14px
     text-decoration: none
@@ -170,7 +189,6 @@ export default {
     color: #000000
     transition-duration: 1s
 
-
 .cart-widget
   position: relative
 
@@ -198,4 +216,12 @@ export default {
     text-decoration: none
     color: #000000
     padding-left: 10px
+
+.fade-enter-active, .fade-leave-active
+  transition: all 0.5s
+
+.fade-enter-from, .fade-leave-to
+  transform: translateX(100%)
+  opacity: 0
+
 </style>

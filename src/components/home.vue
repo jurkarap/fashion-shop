@@ -84,6 +84,15 @@
         </div>
       </div>
     </div>
+    <div class="container-fluid text-center footer-container">
+      <img src="../assets/img/logo-01.svg" alt="">
+      <br>
+      <span class="number">+38 (066) 000 00 00</span>
+      <br>
+      <span class="mail">example@mail.com</span>
+      <br>
+      <span>Fashion Store © 2021</span>
+    </div>
   </div>
 </template>
 
@@ -207,4 +216,18 @@ export default {
     width: 80%
     height: 80%
     margin-bottom: 5%
+  span
+    font-size: 14px
+
+.footer-container
+  .number
+    font-size: 12px
+    font-weight: 800
+  .mail
+    font-size: 15px
+    font-weight: 400
+  img
+    width: 100px
+    height: 100px
+
 </style>
