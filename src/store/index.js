@@ -5,6 +5,7 @@ export default createStore({
   state: {
     products: [],
     cart: [],
+    searchValue: '',
   },
   mutations: {
     SET_PRODUCT_TO_STATE: (state, products) => {
@@ -38,8 +39,10 @@ export default createStore({
       if(state.cart[index].quantity > 1) {
         state.cart[index].quantity--
       }
-
-    }
+    },
+    SET_SEARCH_VALUE: (state, value) => {
+      state.searchValue = value
+    },
   },
   actions: {
     GET_PRODUCTS_FROM_API({commit}) {
@@ -66,7 +69,10 @@ export default createStore({
     },
     DECREMENT_ITEM_QUANTITY({commit}, index) {
       commit('DECREMENT', index)
-    }
+    },
+    GET_SEARCH_VALUE ({commit}, value) {
+      commit ('SET_SEARCH_VALUE', value)
+    },
   },
   getters: {
     PRODUCTS(state) {
@@ -74,6 +80,9 @@ export default createStore({
     },
     CART(state) {
       return state.cart;
+    },
+    SEARCH_VALUE(state) {
+      return state.searchValue;
     }
   },
 });

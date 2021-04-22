@@ -12,7 +12,7 @@
     <div class="navbar">
       <div class="container">
         <div class="navbar-router-links">
-          <router-link class="router-link" to="/home">home</router-link>
+          <router-link class="router-link" to="/">home</router-link>
           <router-link class="router-link" to="/catalog">catalog</router-link>
         </div>
         <div class="text-end languages">
@@ -65,8 +65,11 @@
                 placeholder="Пошук"
                 aria-label=""
                 aria-describedby="button-addon2"
+                v-model="searchValue"
               />
-              <button class="btn" type="button" id="button-addon2">
+              <button class="btn" type="button" id="button-addon2"
+              @click="search(searchValue)"
+              >
                 Пошук
               </button>
             </div>
@@ -94,7 +97,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import Home from "./components/home.vue";
 import wrapper from "./components/wrapper.vue";
 import cart from "./components/cart.vue";
@@ -107,19 +110,32 @@ export default {
     cart,
   },
   computed: {
-    ...mapGetters(["CART"]),
+    ...mapGetters(["CART", "SEARCH_VALUE"]),
   },
   data() {
     return {
       cartOpened: false,
+      searchValue: ''
     };
   },
+  watch: {
+    searchValue() {
+      this.GET_SEARCH_VALUE(this.searchValue);
+    }
+  },
   methods: {
+    ...mapActions ([
+      "GET_SEARCH_VALUE"
+    ]),
     openCart() {
       this.cartOpened = true;
     },
     cartClosed() {
       this.cartOpened = false;
+    },
+    search(value) {
+      this.GET_SEARCH_VALUE(value);
+      this.$router.push('/catalog')
     },
   },
 };

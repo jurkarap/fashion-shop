@@ -3,7 +3,7 @@ import Catalog from "../components/catalog.vue";
 
 const routes = [
   {
-    path: "/home",
+    path: "/",
     name: "Home",
     component: () => import ("../components/home.vue"),
     props: true

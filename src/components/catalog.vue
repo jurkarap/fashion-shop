@@ -2,17 +2,17 @@
   <div class="catalog">
     <div class="container">
       <div class="row">
-        <div class="col-4 mb-5">
+        <div class="col-4">
           <customSelect
             :selected="selected"
             :options="categories"
             @select="sort"
           />
-          <div class="mt-3">
+          <div class="mt-5">
             <p>min: {{ minPrice }}</p>
             <p>max: {{ maxPrice }}</p>
           </div>
-          <div class="range-slider">
+          <div class="range-slider mt-5">
             <input
               type="range"
               min="0"
@@ -73,7 +73,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["PRODUCTS", "CART"]),
+    ...mapGetters(["PRODUCTS", "CART", "SEARCH_VALUE"]),
     filteredProducts() {
       if (this.sortedProducts.length) {
         return this.sortedProducts;
@@ -89,28 +89,52 @@ export default {
     },
     sort(category) {
       let vm = this;
-      this.sortedProducts = [...this.PRODUCTS]
-      this.sortedProducts = this.sortedProducts.filter(function(item) {
-        return item.price >=vm.minPrice && item.price <= vm.maxPrice
-      })
+      this.sortedProducts = [...this.PRODUCTS];
+      this.sortedProducts = this.sortedProducts.filter(function (item) {
+        return item.price >= vm.minPrice && item.price <= vm.maxPrice;
+      });
       if (category) {
-        this.sortedProducts = this.sortedProducts.filter(function(el) {
-          vm.selected === category.name
-          return el.category === category.name
-      })
+        this.sortedProducts = this.sortedProducts.filter(function (el) {
+          vm.selected = category.name;
+          return el.category === category.name;
+        });
       }
     },
     setRangeSlider() {
       if (this.minPrice > this.maxPrice) {
-        let tmp = this.maxPrice
-        this.maxPrice = this.minPrice
-        this.minPrice = tmp
+        let tmp = this.maxPrice;
+        this.maxPrice = this.minPrice;
+        this.minPrice = tmp;
       }
       this.sort();
+    },
+    sortBySearch(value) {
+      this.sortedProducts = [...this.PRODUCTS]
+      if (value) {
+        this.sortedProducts = this.sortedProducts.filter(function (item) {
+          return item.name.toLowerCase().includes(value.toLowerCase());
+        });
+      } else {
+        this.sortedProducts = [...this.PRODUCTS]
+      }
+    },
+    testText(value) {
+      alert(value)
     }
   },
+  watch: {
+    SEARCH_VALUE() {
+      this.sortBySearch(this.SEARCH_VALUE)
+    },
+  },
   mounted() {
-    this.GET_PRODUCTS_FROM_API();
+    this.GET_PRODUCTS_FROM_API()
+    .then((response) => {
+      if(response.data) {
+        this.sort()
+        this.sortBySearch(this.SEARCH_VALUE)
+      }
+    })
   },
 };
 </script>
