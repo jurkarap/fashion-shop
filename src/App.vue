@@ -54,39 +54,58 @@
       </div>
     </div>
     <div class="main-wrapper mt-3">
-      <div class="container d-flex justify-content-between">
-        <img class="logo" src="./assets/img/logo-01.svg" alt="img" />
-        <div class="search-container mt-2">
-          <form class="d-flex">
-            <div class="input-group mb-3">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Пошук"
-                aria-label=""
-                aria-describedby="button-addon2"
-                v-model="searchValue"
-              />
-              <button class="btn" type="button" id="button-addon2"
-              @click="search(searchValue)"
-              >
-                Пошук
-              </button>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col-3 d-none d-lg-block">
+            <img
+              class="logo"
+              src="./assets/img/logo-01.svg"
+              alt="img"
+            />
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="search-container mt-2">
+              <form class="d-flex">
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Пошук"
+                    aria-label=""
+                    aria-describedby="button-addon2"
+                    v-model="searchValue"
+                  />
+                  <button
+                    class="btn"
+                    type="button"
+                    id="button-addon2"
+                    @click="search(searchValue)"
+                  >
+                    Пошук
+                  </button>
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
-        <a class="main-wrapper-number mt-3" href="#">+38 (093) 000 00 00</a>
-        <div href="" class="cart-widget mt-2" @click="openCart()">
-          <img
-            src="./assets/img/shopping-bag.svg"
-            class="shopping-bag"
-            alt=""
-          />
-          <span class="cart-counter text-center">{{ CART.length }}</span>
+          </div>
+          <div class="col-3 mt-3 text-center d-none d-lg-block">
+            <a class="main-wrapper-number" href="#"
+              >+38 (093) 000 00 00</a
+            >
+          </div>
+          <div class="col-6 col-lg-3 text-center">
+            <div href="" class="cart-widget mt-2" @click="openCart()">
+              <img
+                src="./assets/img/shopping-bag.svg"
+                class="shopping-bag"
+                alt=""
+              />
+              <span class="cart-counter text-center">{{ CART.length }}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="container d-flex justify-content-start categories">
+    <div class="container d-none d-lg-flex justify-content-start categories">
       <router-link class="router-link" to="/catalog">Новинки</router-link>
       <router-link class="router-link" to="/catalog">Бренди</router-link>
       <router-link class="router-link" to="/catalog">Одяг</router-link>
@@ -115,18 +134,16 @@ export default {
   data() {
     return {
       cartOpened: false,
-      searchValue: ''
+      searchValue: "",
     };
   },
   watch: {
     searchValue() {
       this.GET_SEARCH_VALUE(this.searchValue);
-    }
+    },
   },
   methods: {
-    ...mapActions ([
-      "GET_SEARCH_VALUE"
-    ]),
+    ...mapActions(["GET_SEARCH_VALUE"]),
     openCart() {
       this.cartOpened = true;
     },
@@ -135,7 +152,7 @@ export default {
     },
     search(value) {
       this.GET_SEARCH_VALUE(value);
-      this.$router.push('/catalog')
+      this.$router.push("/catalog");
     },
   },
 };
@@ -147,6 +164,7 @@ export default {
 
 .app
   position: relative
+  width: 100%
 
 .navbar
   background: #a1a1a1
@@ -214,10 +232,8 @@ export default {
 
 .cart-counter
   position: absolute
-  left: 70%
-  right: 0%
-  top: 0%
-  bottom: 100%
+  left: 50%
+  right: 0
   width: 20px
   height: 20px
   background: #DCDCDC
@@ -239,5 +255,4 @@ export default {
 .fade-enter-from, .fade-leave-to
   transform: translateX(100%)
   opacity: 0
-
 </style>

@@ -2,10 +2,10 @@
   <div class="cart">
     <div class="container-fluid cart-content">
       <div class="row">
-        <div class="col-10 text-center">
+        <div class="col-9 text-center">
           <span>КОШИК {{ cartTotalItems }}</span>
         </div>
-        <div class="col-2 text-end">
+        <div class="col-3 text-center">
           <i class="fas fa-times close-cart" @click="cartClosed()"></i>
         </div>
       </div>
@@ -131,4 +131,10 @@ export default {
     span
       font-size: 24px
       font-weight: 600
+
+@media screen and (max-width: 768px)
+  .cart
+    position: fixed
+    left: 0
+    right: 0
 </style>

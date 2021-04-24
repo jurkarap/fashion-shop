@@ -8,14 +8,7 @@
         <img src="../assets/img/main-slider-img.jpg" alt="" />
       </div>
     </slider>
-    <div class="main-slider-text">
-      <h3>ВЕСНА 2021</h3>
-      <p>
-        Ознайомтеся з нашою новітньою колекцією з великою
-        <br />
-        кількістю стилів і кольорів
-      </p>
-    </div>
+
     <div class="container categories-widgets text-center">
       <p>Категорії магазину</p>
       <slider class="categories-slider" v-bind="options2">
@@ -56,7 +49,7 @@
     <div class="container blog-container text-center">
       <p>БЛОГ</p>
       <div class="row">
-        <div class="col">
+        <div class="col-lg-4">
           <img src="../assets/img/blog-img-2.jpg" alt="" />
           <div class="container">
             <h5>Мода 2020</h5>
@@ -66,14 +59,14 @@
             </span>
           </div>
         </div>
-        <div class="col">
+        <div class="col-lg-4">
           <img src="../assets/img/blog-img-3.jpg" alt="" />
           <div class="container">
             <h5>Вечірні сукні, нові фасони</h5>
             <span> Як обрати сукню по фігурі, та віглядати чарівно </span>
           </div>
         </div>
-        <div class="col">
+        <div class="col-lg-4">
           <img src="../assets/img/blog-img-1.jpg" alt="" />
           <div class="container">
             <h5>Нові тренди літа</h5>
@@ -85,12 +78,12 @@
       </div>
     </div>
     <div class="container-fluid text-center footer-container">
-      <img src="../assets/img/logo-01.svg" alt="">
-      <br>
+      <img src="../assets/img/logo-01.svg" alt="" />
+      <br />
       <span class="number">+38 (066) 000 00 00</span>
-      <br>
+      <br />
       <span class="mail">example@mail.com</span>
-      <br>
+      <br />
       <span>Fashion Store © 2021</span>
     </div>
   </div>
@@ -138,21 +131,11 @@ export default {
 <style lang="sass">
 .main-slider
   margin-bottom: 2%
-  position: relative
   .slider-item
     img
       width: 100%
       height: auto
 
-.main-slider-text
-  position: absolute
-  top: 50%
-  left: 10%
-  p
-    color: #ffffff
-    font-size: 18px
-  h3
-    color: #ffffff
 
 .categories-widgets
   margin-bottom: 5%
@@ -205,7 +188,8 @@ export default {
     font-size: 28px
     font-weight: 600
     opacity: 0.9
-  .col
+  .col-lg-4
+    padding-bottom: 10%
     margin-top: 10px
     transition-duration: 1s
     opacity: 0.8
@@ -229,5 +213,4 @@ export default {
   img
     width: 100px
     height: 100px
-
 </style>
